@@ -1,0 +1,13 @@
+#!/bin/bash
+git add active/*
+MINOR = $(cat version/minor)
+let "MINOR++"
+echo $MINOR > version/minor
+if [ "$1" != "" ]; then
+	COMMSG = $1
+	COMDESC = "AUTO: Save #$MINOR"
+else
+	COMMSG = "AUTO: Save #$MINOR"
+	COMDESC = ""
+fi
+git commit -m "$COMMSG\n\n$COMDESC"
