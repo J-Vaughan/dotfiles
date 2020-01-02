@@ -2,6 +2,6 @@
 cp --update --target-directory=stable active/*
 VERSION=$(cat "version")
 let "VERSION++"
+echo $VERSION > version
 git add .
 git commit -m "AUTO: Version $VERSION"
-echo $VERSION > version
