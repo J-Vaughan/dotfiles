@@ -1,9 +1,16 @@
 #!/bin/bash
-cp --update active/.* stable/ 
+# Overwrite stable files with new files from active
+# Older/previous stable files can be retrieved from VCS
+cp --update active/.* stable/
+
+# Retrieve, increment, and restore major version number
 MAJOR=$(cat "version/major")
 let "MAJOR++"
 echo $MAJOR > version/major
+# Retrieve and reset minor version number
 MINOR=$(cat "version/minor")
 echo 0 > version/minor
+
+# Stage and commit changes and version numbers
 git add stable/* version/*
 git commit -m "RELEASE: Version $MAJOR.$MINOR"
