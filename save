@@ -1,8 +1,14 @@
 #!/bin/bash
+# Retrieve minor version number from (file) storage
 MINOR=$(cat version/minor)
+# Increment minor version number
 let "MINOR++"
+# Store incremented minor version number
 echo $MINOR > version/minor
+
+# Stage active changes and minor version number
 git add active/* version/minor
+# If given, user-defined message is used as git commit title
 if [ "$1" != "" ]; then
 	COMMSG=$1
 	COMDESC="AUTO: Save #$MINOR"
@@ -10,4 +16,5 @@ else
 	COMMSG="AUTO: Save #$MINOR"
 	COMDESC=""
 fi
+# Commit active changes
 git commit -m "$COMMSG" -m "$COMDESC"
