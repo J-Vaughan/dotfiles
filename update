@@ -1,9 +1,9 @@
 #!/bin/bash
-cp --update --target-directory=stable active/*
+cp --update active/.* stable/ 
 MAJOR=$(cat "version/major")
 let "MAJOR++"
 echo $MAJOR > version/major
 MINOR=$(cat "version/minor")
 echo 0 > version/minor
-git add stable/*
+git add stable/* version/*
 git commit -m "RELEASE: Version $MAJOR.$MINOR"
